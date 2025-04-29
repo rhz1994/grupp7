@@ -1,30 +1,26 @@
-const connectionMySQL = require('../connectionMySql');
+const connectionMySQL = require("../connectionMySQL");
 
 function getContinents() {
   return new Promise((resolve, reject) => {
-    let sql = 'SELECT * FROM continents';
+    let sql = "SELECT * FROM continents";
     connectionMySQL.query(sql, (err, rows) => {
-      if (err)
-        reject(err);
-      else
-        resolve(rows);
+      if (err) reject(err);
+      else resolve(rows);
     });
   });
 }
 
 function getContinent(id) {
   return new Promise((resolve, reject) => {
-    let sql = 'SELECT * FROM continents WHERE continentId = ?';
+    let sql = "SELECT * FROM continents WHERE continentId = ?";
     connectionMySQL.query(sql, [id], (err, rows) => {
-      if (err)
-        reject(err);
-      else
-        resolve(rows);
+      if (err) reject(err);
+      else resolve(rows);
     });
   });
 }
 
 module.exports = {
   getContinents,
-  getContinent
+  getContinent,
 };
