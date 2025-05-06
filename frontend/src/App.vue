@@ -1,5 +1,5 @@
 <script setup>
-import NewHomeView from "./views/NewHomeView.vue";
+import HomeView from "./views/HomeView.vue";
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import NewHomeView from "./views/NewHomeView.vue";
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
 
-    <NewHomeView />
+    <HomeView />
   </div>
 </template>
 
