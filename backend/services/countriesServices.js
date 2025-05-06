@@ -29,7 +29,7 @@ function getCountries() {
 // UPDATE
 function updateCountries(countryId, countryName, countryCapital, countryPopulation) {
     return new Promise((resolve, reject) => {
-        let sql = 'UPDATE countries SET countryName = ?, countryCapital = ?, countryPopulation = ?, WHERE countryId = ?';
+        let sql = 'UPDATE countries SET countryName = ?, countryCapital = ?, countryPopulation = ? WHERE countryId = ?';
         let params = [countryName, countryCapital, countryPopulation, countryId];
 
         connectionMySQL.query(sql, params, (err) => {
@@ -56,5 +56,8 @@ function deleteCountry(countryId) {
 }
 
 module.exports = {
-  getCountries,
-};
+    getCountries,
+    addCountry,
+    updateCountries,
+    deleteCountry
+  };
