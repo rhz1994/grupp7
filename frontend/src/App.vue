@@ -1,5 +1,5 @@
 <script setup>
-import TravelCard from "./components/TravelCard.vue";
+import HomeView from "./views/HomeView.vue";
 </script>
 
 <template>
@@ -10,8 +10,9 @@ import TravelCard from "./components/TravelCard.vue";
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
+
+    <HomeView />
   </div>
-  <TravelCard />
 </template>
 
 <style scoped>
