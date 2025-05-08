@@ -6,12 +6,13 @@
         v-for="country in countries"
         :key="country.countryId"
       >
-        <div class="country-name">{{ country.countryName }}</div>
+
         <img
           class="flag-img"
           :src="country.flagURL"
           :alt="'Flagga för ' + country.countryName"
         />
+         {{ country.countryName }}
 
         <div class="infoBox" v-if="selectedCountry === country.countryName">
           <button
@@ -24,7 +25,7 @@
           <ul>
             <li>Capital: {{ country.countryCapital }}</li>
             <li>Population: {{ country.countryPopulation }}</li>
-            <li>Continent: {{ country.countryContinent }}</li>
+            <li>Continent: {{ country.continentName }}</li>
           </ul>
         </div>
 
@@ -91,21 +92,28 @@ const setSelectedCountry = (country) => {
   border: 1px solid rgba(7, 7, 7, 0.158);
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(44, 43, 43, 0.1);
-  padding: 15px;
+  padding: 5px;
   margin: 23px;
   background-color: #fff;
+
 }
 
+
+
 .btn-container button {
-  margin: 5px;
+  margin: 1px;
+  font-size: 80%;
+}
+
+.btn-container img{
+  margin-right: 10px;
+
 }
 
 .flag-img {
-  width: 60px;
-  height: auto;
+  width: 15%;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-right: 1em;
 }
 
 .country-name {
@@ -135,12 +143,15 @@ ul {
   margin: 0;
 }
 
+li{
+  font-size: 15px;
+}
 .infoBox button {
   position: absolute;
   top: 6px;
   right: 6px;
   padding: 4px 8px;
   line-height: 1;
-  font-size: 12px;
+  font-size: 10px;
 }
 </style>

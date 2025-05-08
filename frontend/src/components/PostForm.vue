@@ -95,7 +95,7 @@ const props = defineProps({
 const form = ref({
   yearVisited: "",
   rating: 1,
-  notes: "",,
+  notes: "",
     imageURL: ''
 });
 
@@ -112,7 +112,7 @@ const submitForm = async () => {
       rating: form.value.rating,
       notes: form.value.notes,
       userId: 1,
-      countryId: props.selectedCountry.countryId,,
+      countryId: props.selectedCountry.countryId,
         imageURL: form.value.imageURL,
     });
     resetForm();
