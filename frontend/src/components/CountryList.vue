@@ -43,14 +43,19 @@
       </li>
     </ul>
   </div>
+
+  <PostForm :selectedCountry="selectedCountry" />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import PostForm from './PostForm.vue'; // importing component
+
 
 const countries = ref(null);
 const selectedCountry = ref(false);
+const selectedCountry = ref(null);
 
 onMounted(async () => {
   try {
@@ -69,6 +74,14 @@ function showInfo(country) {
 function closeInfo() {
   selectedCountry.value = null;
 }
+
+
+// Max postform
+
+const setSelectedCountry = (country) => {
+  selectedCountry.value = country;
+};
+
 </script>
 
 <style scoped>
