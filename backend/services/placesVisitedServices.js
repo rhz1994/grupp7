@@ -12,7 +12,7 @@ function getPlacesVisited() {
 
 function getPlacesVisitedByUser(id) {
   return new Promise((resolve, reject) => {
-    let sql = `SELECT placesVisited.yearVisited, placesVisited.rating, placesVisited.notes, placesVisited.imageURL, countries.countryName, countries.flagURL
+    let sql = `SELECT placesVisited.placeVisitedId, placesVisited.yearVisited, placesVisited.rating, placesVisited.notes, placesVisited.imageURL, countries.countryName, countries.flagURL
 FROM placesVisited
 INNER JOIN countries ON placesVisited.countryId = countries.countryId WHERE userId = ? ORDER BY placesVisited.yearVisited DESC`;
     connectionMySQL.query(sql, [id], (err, rows) => {

@@ -19,6 +19,16 @@ onMounted(async () => {
     console.error(err);
   }
 });
+
+const deletePost = async (postId) => {
+  try {
+    await axios.delete(`http://localhost:3000/api/placesVisited/${postId}`);
+  } catch (err) {
+    error.value = "Kunde inte radera post";
+    console.error(err);
+  }
+  location.reload();
+};
 </script>
 
 <template>
@@ -50,6 +60,7 @@ onMounted(async () => {
         <div class="d-flex text-center align-items-center">
           <p class="year">{{ journey.yearVisited }}</p>
           <p class="notes">- {{ journey.notes }}</p>
+          <p class="notes">{{ journey.placeVisitedId || "Inget värde" }}</p>
         </div>
       </div>
       <img
@@ -61,6 +72,10 @@ onMounted(async () => {
       <div class="ms-auto mt-auto thump-up">
         <i class="fas fa-thumbs-up"></i>
       </div>
+      <i
+        @click="deletePost(journey.placeVisitedId)"
+        class="fa-solid fa-trash"
+      ></i>
     </div>
   </div>
 </template>
@@ -107,6 +122,16 @@ i:hover,
 
 .fas.fa-user-circle {
   color: #888;
+}
+
+.fa-trash {
+  font-size: 1.5rem;
+}
+
+.fa-trash:hover {
+  color: red;
+  transform: scale(1.2);
+  transition: transform 0.2s ease, color 0.3s ease;
 }
 
 h5 {

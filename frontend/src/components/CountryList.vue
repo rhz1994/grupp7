@@ -36,7 +36,14 @@
             <i class="fa-solid fa-info"></i>
           </button>
 
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postFormModal" @click="setSelectedCountry(country)">Add Visit</button>  
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#postFormModal"
+            @click="setSelectedCountry(country)"
+          >
+            Add Visit
+          </button>
         </div>
       </li>
     </ul>
@@ -48,8 +55,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import PostForm from './PostForm.vue'; // importing component
-
+import PostForm from "./PostForm.vue"; // importing component
 
 const countries = ref(null);
 const selectedCountry = ref(false);
@@ -58,7 +64,7 @@ onMounted(async () => {
   try {
     const response = await axios.get(`http://localhost:3000/api/countries`);
     countries.value = response.data.countries;
-    console.log(countries.value);
+    // console.log(countries.value);
   } catch (err) {
     error.value = "Kunde inte hämta data";
     console.error(err);
@@ -72,13 +78,11 @@ function closeInfo() {
   selectedCountry.value = null;
 }
 
-
 // Max postform
 
 const setSelectedCountry = (country) => {
   selectedCountry.value = country;
 };
-
 </script>
 
 <style scoped>
