@@ -22,6 +22,10 @@
                 <label for="note" class="form-label">Note</label>
                 <textarea v-model="form.notes" class="form-control" id="note" rows="3" required></textarea>
               </div>
+              <div class="mb-3">
+                <label for="imageURL" class="form-label">Image URL</label>
+                <textarea v-model="form.imageURL" class="form-control" id="imageURL" rows="1" required></textarea>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -50,7 +54,8 @@
   const form = ref({
     yearVisited: '',
     rating: 1,
-    notes: ''
+    notes: '',
+    imageURL: ''
   });
   
   // POST anrop
@@ -66,7 +71,8 @@
         rating: form.value.rating,
         notes: form.value.notes,
         userId: 1, 
-        countryId: props.selectedCountry.countryId
+        countryId: props.selectedCountry.countryId,
+        imageURL: form.value.imageURL,
       });
       resetForm();
       closeModal();
@@ -81,6 +87,7 @@
     form.value.yearVisited = '';
     form.value.rating = 1;
     form.value.notes = '';
+    form.value.imageURL = '';
   };
   
   // Stänga modalen

@@ -32,10 +32,10 @@ function getPlaceVisitedById(id) {
   });
 }
 
-function addPlaceVisited(yearVisited, rating, notes, userId, countryId) {
+function addPlaceVisited(yearVisited, rating, notes, userId, countryId, imageURL) {
   return new Promise((resolve, reject) => {
-    let sql = `INSERT INTO placesVisited (yearVisited, rating, notes, userId, countryId) VALUES (?,?,?,?,?)`;
-    let params = [yearVisited, rating, notes, userId, countryId];
+    let sql = `INSERT INTO placesVisited (yearVisited, rating, notes, userId, countryId, imageURL) VALUES (?,?,?,?,?,?)`;
+    let params = [yearVisited, rating, notes, userId, countryId, imageURL];
     connectionMySQL.query(sql, params, (err) => {
       if (err) reject(err);
       else resolve();
