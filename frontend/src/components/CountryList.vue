@@ -36,9 +36,7 @@
             <i class="fa-solid fa-info"></i>
           </button>
 
-          <button class="btn btn-outline-primary" type="submit">
-            <i class="fa-solid fa-plus"></i>
-          </button>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postFormModal" @click="setSelectedCountry(country)">Add Visit</button>  
         </div>
       </li>
     </ul>
@@ -55,7 +53,6 @@ import PostForm from './PostForm.vue'; // importing component
 
 const countries = ref(null);
 const selectedCountry = ref(false);
-const selectedCountry = ref(null);
 
 onMounted(async () => {
   try {
