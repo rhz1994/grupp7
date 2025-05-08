@@ -3,7 +3,9 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Visit to {{ selectedCountry.countryName }}</h5>
+            <h5 class="modal-title">
+              Add Visit to {{ selectedCountry?.countryName || "Unknown Country" }}
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -24,7 +26,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="submitForm">Save</button>
+            <button type="submit" class="btn btn-primary" @click="submitForm">Save</button>
           </div>
         </div>
       </div>
@@ -34,9 +36,11 @@
   <script setup>
   import { ref } from "vue";
   import axios from "axios";
+  import * as bootstrap from "bootstrap";
+
   
   // Tar emot land som props
-  defineProps({
+  const props = defineProps({
     selectedCountry: {
       type: Object,
       required: true
@@ -49,9 +53,9 @@
     notes: ''
   });
   
-  // Skickar POST-anrop till backend
+  // POST anrop
   const submitForm = async () => {
-    if (!selectedCountry) {
+    if (!props.selectedCountry) {
       alert("Välj ett land först.");
       return;
     }
@@ -62,7 +66,7 @@
         rating: form.value.rating,
         notes: form.value.notes,
         userId: 1, 
-        countryId: selectedCountry.countryId
+        countryId: props.selectedCountry.countryId
       });
       resetForm();
       closeModal();
@@ -82,8 +86,10 @@
   // Stänga modalen
   const closeModal = () => {
     const modal = document.getElementById('postFormModal');
-    const modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.hide();
+    if (modal) {
+      const modalInstance = bootstrap.Modal.getInstance(modal) || new bootstrap.Modal(modal);
+      modalInstance.hide();
+    }
   };
   </script>
   
