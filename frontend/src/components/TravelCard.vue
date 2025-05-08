@@ -52,7 +52,11 @@ onMounted(async () => {
           <p class="notes">- {{ journey.notes }}</p>
         </div>
       </div>
-      <img :src="journey.imageURL" :alt="'Bild för ' + journey.countryName" />
+      <img
+        id="travelImage"
+        :src="journey.imageURL"
+        :alt="'Bild för ' + journey.countryName"
+      />
 
       <div class="ms-auto mt-auto thump-up">
         <i class="fas fa-thumbs-up"></i>
@@ -69,11 +73,17 @@ onMounted(async () => {
   flex-direction: column;
 }
 
-img {
+#travelImage {
   width: 100%;
   height: 50%;
   object-fit: cover;
+}
+
+img {
   border: 1px solid lightgray;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
 }
 
 i {
