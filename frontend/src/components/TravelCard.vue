@@ -59,8 +59,7 @@ const deletePost = async (postId) => {
         </div>
         <div class="d-flex text-center align-items-center">
           <p class="year">{{ journey.yearVisited }}</p>
-          <p class="notes">- {{ journey.notes }}</p>
-          <p class="notes">{{ journey.placeVisitedId || "Inget värde" }}</p>
+          <p class="notes">{{ journey.notes }}</p>
         </div>
       </div>
       <img
@@ -125,7 +124,7 @@ i:hover,
 }
 
 .fa-trash {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .fa-trash:hover {
@@ -154,7 +153,7 @@ h5 {
 }
 
 .notes {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
   text-align: center;
   margin-top: 0.5rem;

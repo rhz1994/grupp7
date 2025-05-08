@@ -6,13 +6,12 @@
         v-for="country in countries"
         :key="country.countryId"
       >
-
         <img
           class="flag-img"
           :src="country.flagURL"
           :alt="'Flagga för ' + country.countryName"
         />
-         {{ country.countryName }}
+        {{ country.countryName }}
 
         <div class="infoBox" v-if="selectedCountry === country.countryName">
           <button
@@ -43,7 +42,7 @@
             data-bs-target="#postFormModal"
             @click="setSelectedCountry(country)"
           >
-            Add Visit
+            <i class="fa-solid fa-plus"></i>
           </button>
         </div>
       </li>
@@ -59,7 +58,7 @@ import axios from "axios";
 import PostForm from "./PostForm.vue"; // importing component
 
 const countries = ref(null);
-const selectedCountry = ref(false);
+const selectedCountry = ref(null);
 
 onMounted(async () => {
   try {
@@ -95,19 +94,15 @@ const setSelectedCountry = (country) => {
   padding: 5px;
   margin: 23px;
   background-color: #fff;
-
 }
-
-
 
 .btn-container button {
   margin: 1px;
   font-size: 80%;
 }
 
-.btn-container img{
+.btn-container img {
   margin-right: 10px;
-
 }
 
 .flag-img {
@@ -143,7 +138,7 @@ ul {
   margin: 0;
 }
 
-li{
+li {
   font-size: 15px;
 }
 .infoBox button {

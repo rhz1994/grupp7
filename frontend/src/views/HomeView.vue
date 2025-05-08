@@ -16,37 +16,41 @@ import CountryList from "../components/CountryList.vue";
   </nav>
 
   <main>
-    <div class="d-flex flex-grow">
-      <b-card title="Komponent 1" class="me-3" style="flex: 2">
-        <h2 class="fw-bold rounded shadow pb-4 pt-4" style="flex: 2">
-          Mina resor
-        </h2>
-        <TravelCard />
-      </b-card>
+    <div class="d-flex">
+      <div class="card" style="flex: 3; padding: 0">
+        <div class="card-body">
+          <h2 class="fw-bold rounded shadow pb-4 pt-4">Mina resor</h2>
+          <TravelCard />
+        </div>
+      </div>
 
-      <b-card title="Komponent 2" style="flex: 1">
-        <h2 class="fw-bold rounded shadow pb-4 pt-4" style="flex: 1">
-          Lägg till resor
-        </h2>
-        <CountryList />
-      </b-card>
+      <div class="card" style="flex: 2; padding: 0">
+        <div class="card-body">
+          <h2 class="fw-bold rounded shadow pb-4 pt-4">Lägg till resor</h2>
+          <CountryList />
+        </div>
+      </div>
     </div>
   </main>
 </template>
 
 <style scoped>
+.card {
+  border: none;
+}
+
 h2 {
   background: linear-gradient(to right, #005e97, #007bbf);
   color: white;
 }
 
 main {
-  padding: 4em;
+  padding: 2em;
 }
 .navbar {
   width: 100%;
   height: 6em;
-  margin-bottom: 5em;
+  margin-bottom: 2em;
   background-color: #005e97;
 }
 
@@ -63,5 +67,14 @@ i {
 i:hover {
   filter: drop-shadow(0 0 2em #005e97);
   cursor: pointer;
+}
+
+.d-flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.card-body {
+  padding: 2em;
 }
 </style>

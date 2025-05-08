@@ -41,7 +41,7 @@
               />
             </div>
             <div class="mb-3">
-              <label for="note" class="form-label">Note</label>
+              <label for="note" class="form-label">Notes</label>
               <textarea
                 v-model="form.notes"
                 class="form-control"
@@ -67,6 +67,7 @@
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
+            @click="closeModal()"
           >
             Close
           </button>
@@ -83,12 +84,15 @@
 import { ref } from "vue";
 import axios from "axios";
 import * as bootstrap from "bootstrap";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 // Tar emot land som props
 const props = defineProps({
   selectedCountry: {
     type: Object,
-    required: true,
+    required: false,
+    default: null,
   },
 });
 
@@ -96,8 +100,15 @@ const form = ref({
   yearVisited: "",
   rating: 1,
   notes: "",
-    imageURL: ''
+  imageURL: "",
 });
+
+// Toast när användaren har lagt till plats
+const notify = () => {
+  toast("New place added successfully!", {
+    autoClose: 2000,
+  });
+};
 
 // POST anrop
 const submitForm = async () => {
@@ -113,11 +124,11 @@ const submitForm = async () => {
       notes: form.value.notes,
       userId: 1,
       countryId: props.selectedCountry.countryId,
-        imageURL: form.value.imageURL,
+      imageURL: form.value.imageURL,
     });
     resetForm();
     closeModal();
-    alert("New place added successfully!");
+    notify();
   } catch (error) {
     console.error("Error adding place:", error);
   }
@@ -129,7 +140,7 @@ const resetForm = () => {
   form.value.yearVisited = "";
   form.value.rating = 1;
   form.value.notes = "";
-    form.value.imageURL = '';
+  form.value.imageURL = "";
 };
 
 // Stänga modalen
@@ -140,5 +151,12 @@ const closeModal = () => {
       bootstrap.Modal.getInstance(modal) || new bootstrap.Modal(modal);
     modalInstance.hide();
   }
+  resetForm();
 };
 </script>
+
+<style>
+.form-control {
+  border: black solid 2px;
+}
+</style>
