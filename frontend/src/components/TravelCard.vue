@@ -105,7 +105,7 @@ i {
 }
 
 .thump-up {
-  font-size: 2rem;
+  font-size: 1rem;
   color: #005e97;
   padding-top: 1em;
 }
@@ -124,7 +124,7 @@ i:hover,
 }
 
 .fa-trash {
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .fa-trash:hover {

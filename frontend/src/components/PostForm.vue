@@ -105,7 +105,7 @@ const form = ref({
 
 // Toast när användaren har lagt till plats
 const notify = () => {
-  toast("New place added successfully!", {
+  toast.success("New visit added successfully!", {
     autoClose: 2000,
   });
 };
@@ -129,10 +129,16 @@ const submitForm = async () => {
     resetForm();
     closeModal();
     notify();
+    location.reload();
   } catch (error) {
     console.error("Error adding place:", error);
+    toast.error("Failed to save the visit. Try again later.", {
+      autoClose: 3000,
+      theme: "colored",
+      icon: "⚠️",
+      position: "bottom-right",
+    });
   }
-  location.reload();
 };
 
 // Återställr formuläret
@@ -156,7 +162,8 @@ const closeModal = () => {
 </script>
 
 <style>
-.form-control {
-  border: black solid 2px;
+input.form-control,
+textarea.form-control {
+  border: 2px solid black;
 }
 </style>

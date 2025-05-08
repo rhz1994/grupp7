@@ -8,7 +8,7 @@ import CountryList from "../components/CountryList.vue";
     <div class="container">
       <img
         class="logo"
-        src="../assets/WorldlyBlue.png"
+        src="../assets/Worldly.png"
         alt="Bild på Worldly-logga"
       />
       <i class="fas fa-user-circle fa-3x"></i>
@@ -44,14 +44,11 @@ h2 {
   color: white;
 }
 
-main {
-  padding: 2em;
-}
 .navbar {
   width: 100%;
-  height: 6em;
+  height: 4em;
   margin-bottom: 2em;
-  background-color: #005e97;
+  background-color: #08568c;
 }
 
 i {
@@ -59,7 +56,7 @@ i {
 }
 
 .logo {
-  height: 5em;
+  height: 3em;
   will-change: filter;
   transition: filter 300ms;
 }
