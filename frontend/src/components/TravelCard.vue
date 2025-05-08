@@ -28,19 +28,36 @@ onMounted(async () => {
       :key="journey.placeVisitedId"
       class="card mb-3 shadow"
     >
-      <div class="d-flex justify-content-start">
-        <i class="fas fa-user-circle fa-2x"></i>
-        <span class="fw-bold">{{ userName }}</span>
-      </div>
-      <div class="card-body">
-        <div class="me-md-4">
-          <h5 class="card-title">{{ journey.countryName }}</h5>
-          {{ journey.yearVisited }}
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-user-circle fa-2x me-2"></i>
+          <span class="fw-bold">{{ userName }}</span>
         </div>
-        <p class="card-text mb-1">{{ journey.rating }} ⭐</p>
-        <p class="card-text">{{ journey.notes }}</p>
+        <p class="rating">{{ journey.rating }} ⭐</p>
       </div>
-      <img :src="journey.imageURL" :alt="'Bild för ' + journey.countryName" />
+
+      <div class="card-body">
+        <div class="me-md-4 d-flex justify-content-between align-items-center">
+          <h5 class="card-title flex-grow-1 text-center">
+            {{ journey.countryName }}
+          </h5>
+          <img
+            class="w-25"
+            :src="journey.flagURL"
+            :alt="'Flagga för ' + journey.countryName"
+          />
+        </div>
+        <div class="d-flex text-center align-items-center">
+          <p class="year">{{ journey.yearVisited }}</p>
+          <p class="notes">- {{ journey.notes }}</p>
+        </div>
+      </div>
+      <img
+        id="travelImage"
+        :src="journey.imageURL"
+        :alt="'Bild för ' + journey.countryName"
+      />
+
       <div class="ms-auto mt-auto thump-up">
         <i class="fas fa-thumbs-up"></i>
       </div>
@@ -55,16 +72,67 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
 }
-.thump-up {
-  font-size: 2rem;
-}
-img {
+
+#travelImage {
   width: 100%;
   height: 50%;
   object-fit: cover;
 }
 
+img {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
+}
+
 i {
   margin-right: 3%;
+}
+
+.thump-up {
+  font-size: 2rem;
+  color: #005e97;
+  padding-top: 1em;
+}
+
+i:hover,
+.rating:hover {
+  color: darkgreen;
+  transform: scale(1.2);
+  transition: transform 0.2s ease, color 0.3s ease;
+
+  cursor: pointer;
+}
+
+.fas.fa-user-circle {
+  color: #888;
+}
+
+h5 {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.rating {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.year {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  border-right: lightgray solid 1px;
+  padding-right: 1em;
+  color: green;
+}
+
+.notes {
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 0.5rem;
+  padding-left: 1em;
 }
 </style>
