@@ -4,9 +4,9 @@
       <li
         class="list-group-item d-flex align-items-center justify-content-between"
         v-for="country in countries"
+        :key="country.countryId"
       >
         <div class="country-name">{{ country.countryName }}</div>
-        :key="country.countryId"
         <img
           class="flag-img"
           :src="country.flagURL"
