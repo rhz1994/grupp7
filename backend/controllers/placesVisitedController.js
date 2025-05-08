@@ -36,7 +36,7 @@ exports.getPlaceVisitedById = async (req, res) => {
 };
 
 exports.addPlaceVisited = async (req, res) => {
-  const { yearVisited, rating, notes, userId, countryId } = req.body;
+  const { yearVisited, rating, notes, userId, countryId, imageURL } = req.body;
 
   if (!yearVisited || !rating || !userId || !countryId) {
     return res.status(400).json({
@@ -51,7 +51,8 @@ exports.addPlaceVisited = async (req, res) => {
       rating,
       notes || "",
       userId,
-      countryId
+      countryId,
+      imageURL ? imageURL.trim() : ""
     );
     return res.status(201).json({
       success: true,

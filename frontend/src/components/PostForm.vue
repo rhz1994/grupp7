@@ -50,6 +50,16 @@
                 required
               ></textarea>
             </div>
+            <div class="mb-3">
+              <label for="imageURL" class="form-label">Image URL</label>
+              <textarea
+                v-model="form.imageURL"
+                class="form-control"
+                id="imageURL"
+                rows="1"
+                required
+              ></textarea>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -85,7 +95,8 @@ const props = defineProps({
 const form = ref({
   yearVisited: "",
   rating: 1,
-  notes: "",
+  notes: "",,
+    imageURL: ''
 });
 
 // POST anrop
@@ -101,7 +112,8 @@ const submitForm = async () => {
       rating: form.value.rating,
       notes: form.value.notes,
       userId: 1,
-      countryId: props.selectedCountry.countryId,
+      countryId: props.selectedCountry.countryId,,
+        imageURL: form.value.imageURL,
     });
     resetForm();
     closeModal();
@@ -117,6 +129,7 @@ const resetForm = () => {
   form.value.yearVisited = "";
   form.value.rating = 1;
   form.value.notes = "";
+    form.value.imageURL = '';
 };
 
 // Stänga modalen
