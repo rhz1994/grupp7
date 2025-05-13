@@ -13,7 +13,10 @@
         />
         {{ country.countryName }}
 
-        <div class="infoBox" v-if="selectedCountry === country.countryName">
+        <div
+          class="infoBox"
+          v-if="selectedCountry?.countryId === country.countryId"
+        >
           <button
             class="btn btn-outline-primary"
             type="submit"
@@ -25,14 +28,15 @@
             <li>Capital: {{ country.countryCapital }}</li>
             <li>Population: {{ country.countryPopulation }}</li>
             <li>Continent: {{ country.continentName }}</li>
+            <li v-if="selectedCountryInfo">
+              Info: {{ selectedCountryInfo.description }}
+            </li>
+            <li v-else>Info: Saknas</li>
           </ul>
         </div>
 
         <div class="btn-container">
-          <button
-            class="btn btn-outline-primary"
-            @click="showInfo(country.countryName)"
-          >
+          <button class="btn btn-outline-primary" @click="showInfo(country)">
             <i class="fa-solid fa-info"></i>
           </button>
 
@@ -53,11 +57,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import PostForm from "./PostForm.vue"; // importing component
 
 const countries = ref(null);
+const countryInfo = ref([]);
+
 const selectedCountry = ref(null);
 
 onMounted(async () => {
@@ -69,6 +75,24 @@ onMounted(async () => {
     error.value = "Kunde inte hämta data";
     console.error(err);
   }
+});
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/api/countryInfo`);
+    countryInfo.value = response.data;
+    console.log(countryInfo.value);
+  } catch (err) {
+    error.value = "Kunde inte hämta data";
+    console.error(err);
+  }
+});
+
+const selectedCountryInfo = computed(() => {
+  if (!selectedCountry.value) return null;
+  return countryInfo.value.find(
+    (info) => info.country === selectedCountry.value.countryName
+  );
 });
 
 function showInfo(country) {

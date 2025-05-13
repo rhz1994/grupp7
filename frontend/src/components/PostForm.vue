@@ -91,7 +91,6 @@ import "vue3-toastify/dist/index.css";
 const props = defineProps({
   selectedCountry: {
     type: Object,
-    required: false,
     default: null,
   },
 });
