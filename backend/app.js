@@ -9,7 +9,7 @@ const placesVisitedRoutes = require("./routes/placesVisitedRoutes");
 const continentsRoutes = require("./routes/continentsRoutes");
 const countriesRoutes = require("./routes/countriesRoutes");
 const userRoutes = require("./routes/userRoutes");
-const countryListRoutes = require("./routes/countryListRoutes");
+const countryInfoRoutes = require("./routes/countryInfoRoutes");
 
 app.use(express.json());
 
@@ -27,7 +27,7 @@ app.use(countriesRoutes);
 
 app.use(userRoutes);
 
-app.use(countryListRoutes);
+app.use(countryInfoRoutes);
 
 connectionMongoDB();
 
