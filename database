@@ -1,0 +1,98 @@
+CREATE DATABASE worldly;
+
+USE worldly;
+
+CREATE TABLE continents (
+    continentId INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    continentName VARCHAR(50) NOT NULL UNIQUE
+);
+
+INSERT INTO continents(continentName)
+VALUES
+    ('North America'),
+    ('South America'),
+    ('Europe'),
+    ('Africa'),
+    ('Asia'),
+    ('Oceania');
+
+CREATE TABLE users (
+    userId INT NOT NULL AUTO_INCREMENT,
+    userName VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY (userId)
+);
+
+CREATE TABLE countries (
+    countryId INT NOT NULL AUTO_INCREMENT,
+    countryName VARCHAR(50) NOT NULL UNIQUE,
+    countryCapital VARCHAR(50) NOT NULL UNIQUE,
+    countryPopulation BIGINT NOT NULL,
+    continentId INT NOT NULL,
+    flagURL VARCHAR(255),
+    PRIMARY KEY (countryId),
+    FOREIGN KEY (continentId) REFERENCES continents(continentId)
+);
+
+INSERT INTO countries (countryName, countryCapital, countryPopulation, continentId, flagURL)
+VALUES
+    ('Sweden', 'Stockholm', 10576145, 3, 'https://flagcdn.com/w320/se.png'),
+    ('Norway', 'Oslo', 5571634, 3, 'https://flagcdn.com/w320/no.png'),
+    ('Denmark', 'Copenhagen', 5959464, 3, 'https://flagcdn.com/w320/dk.png'),
+    ('Finland', 'Helsinki', 5599869, 3, 'https://flagcdn.com/w320/fi.png'),
+    ('United Kingdom', 'London', 68265209, 3, 'https://flagcdn.com/w320/gb.png'),
+    ('France', 'Paris', 68513000, 3, 'https://flagcdn.com/w320/fr.png'),
+    ('Spain', 'Madrid', 49077984, 3, 'https://flagcdn.com/w320/es.png'),
+    ('Germany', 'Berlin', 83510950, 3, 'https://flagcdn.com/w320/de.png'),
+    ('Italy', 'Rome', 58974433, 3, 'https://flagcdn.com/w320/it.png'),
+    ('Russia', 'Moscow', 146150789, 3, 'https://flagcdn.com/w320/ru.png'),
+    ('China', 'Beijing', 1425671352, 5, 'https://flagcdn.com/w320/cn.png'),
+    ('Japan', 'Tokyo', 123294513, 5, 'https://flagcdn.com/w320/jp.png'),
+    ('Vietnam', 'Hanoi', 98858950, 5, 'https://flagcdn.com/w320/vn.png'),
+    ('Iran', 'Teheran', 89172767, 5, 'https://flagcdn.com/w320/ir.png'),
+    ('Thailand', 'Bangkok', 71801279, 5, 'https://flagcdn.com/w320/th.png'),
+    ('Ethiopia', 'Addis Ababa', 128691692, 4, 'https://flagcdn.com/w320/et.png'),
+    ('Morocco', 'Rabat', 37712505, 4, 'https://flagcdn.com/w320/ma.png'),
+    ('Uganda', 'Kampala', 48656601, 4, 'https://flagcdn.com/w320/ug.png'),
+    ('Seychelles', 'Victoria', 127951, 4, 'https://flagcdn.com/w320/sc.png'),
+    ('Angola', 'Luanda', 36749906, 4, 'https://flagcdn.com/w320/ao.png'),
+    ('United States', 'Washington D.C', 333287557, 1, 'https://flagcdn.com/w320/us.png'),
+    ('Mexico', 'Mexico City', 129035733, 1, 'https://flagcdn.com/w320/mx.png'),
+    ('Canada', 'Ottawa', 39566248, 1, 'https://flagcdn.com/w320/ca.png'),
+    ('Cuba', 'Havana', 11113215, 1, 'https://flagcdn.com/w320/cu.png'),
+    ('Jamaica', 'Kingston', 2734092, 1, 'https://flagcdn.com/w320/jm.png'),
+    ('Brazil', 'Brasilia', 216284269, 2, 'https://flagcdn.com/w320/br.png'),
+    ('Colombia', 'Bogotá', 52215503, 2, 'https://flagcdn.com/w320/co.png'),
+    ('Argentina', 'Buenos Aires', 45773884, 2, 'https://flagcdn.com/w320/ar.png'),
+    ('Venezuela', 'Caracas', 32219500, 2, 'https://flagcdn.com/w320/ve.png'),
+    ('Bolivia', 'La Paz', 12006031, 2, 'https://flagcdn.com/w320/bo.png'),
+    ('Australia', 'Canberra', 26598311, 6, 'https://flagcdn.com/w320/au.png'),
+    ('Papua New Guinea', 'Port Moresby', 10329931, 6, 'https://flagcdn.com/w320/pg.png'),
+    ('New Zealand', 'Wellington', 5177574, 6, 'https://flagcdn.com/w320/nz.png'),
+    ('Fiji', 'Suva', 9901603, 6, 'https://flagcdn.com/w320/fj.png'),
+    ('Vanuatu', 'Port Vila', 307941, 6, 'https://flagcdn.com/w320/vu.png');
+
+CREATE TABLE placesVisited (
+    placeVisitedId INT NOT NULL AUTO_INCREMENT,
+    yearVisited YEAR NOT NULL,
+    rating INT NOT NULL CHECK ( rating BETWEEN 1 AND 5),
+    notes TEXT,
+    userId INT NOT NULL,
+    countryId INT NOT NULL,
+    imageURL VARCHAR(255),
+    PRIMARY KEY (placeVisitedId),
+    FOREIGN KEY (countryId) REFERENCES countries(countryId),
+    FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE CASCADE
+);
+
+-- Data för att fylla placesVisited-tabell
+
+INSERT INTO users (userName)
+VALUES ('John Doe');
+
+INSERT INTO placesVisited (yearVisited, rating, notes, userId, countryId, imageURL) VALUES
+(2023, 5, 'En fantastisk resa', 1, 30, 'https://images.pexels.com/photos/30929523/pexels-photo-30929523/free-photo-of-vacker-utsikt-over-uyunis-saltslatter-med-snotackta-berg.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), -- Bolivia
+(2022, 4, 'Otrolig naturupplevelse i Patagonien', 1, 28, 'https://images.pexels.com/photos/3739624/pexels-photo-3739624.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), -- Argentina
+(2019, 3, 'Historiska sevärdheter i Rom', 1, 9, 'https://images.pexels.com/photos/2885919/pexels-photo-2885919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), -- Italien
+(2018, 5, 'Casablanca var oförglömligt', 1, 17, 'https://images.pexels.com/photos/2404046/pexels-photo-2404046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
+(2020, 2, 'Det regnade hela tiden', 1, 5, 'https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), -- Storbritannien
+(2021, 5, 'Sakura-säsong i Kyoto var magisk', 1, 12, 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); -- Japan

@@ -25,11 +25,13 @@
             <i class="fa-solid fa-xmark"></i>
           </button>
           <ul>
-            <li>Capital: {{ country.countryCapital }}</li>
-            <li>Population: {{ country.countryPopulation }}</li>
-            <li>Continent: {{ country.continentName }}</li>
+            <li><strong> Capital: </strong> {{ country.countryCapital }}</li>
+            <li>
+              <strong> Population: </strong> {{ country.countryPopulation }}
+            </li>
+            <li><strong> Continent: </strong> {{ country.continentName }}</li>
             <li v-if="selectedCountryInfo">
-              Info: {{ selectedCountryInfo.description }}
+              <strong> Info: </strong> {{ selectedCountryInfo.description }}
             </li>
             <li v-else>Info: Saknas</li>
           </ul>
@@ -148,7 +150,7 @@ const setSelectedCountry = (country) => {
   top: 1%;
   /* margin-top: 8px; */
   background-color: rgba(248, 249, 250, 0.95);
-  padding: 3px;
+  padding: 10px;
   width: 100%;
   border: 1px solid rgba(7, 7, 7, 0.158);
   border-radius: 5px;
