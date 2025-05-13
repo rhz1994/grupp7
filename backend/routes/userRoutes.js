@@ -1,21 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {
-  createUserMySQL,
-  getUsersMySQL,
-  getUserMySQL,
-  updateUserMySQL,
-  deleteUserMySQL,
-  createUserMongo,
-  getUsersMongo,
-  getUserMongo,
-  updateUserMongo,
-  deleteUserMongo
-} = require('../controllers/userController');
+const userController = require("../controllers/userController");
 
-router.route('/mysql').post(createUserMySQL).get(getUsersMySQL);
-router.route('/mysql/:id').get(getUserMySQL).put(updateUserMySQL).delete(deleteUserMySQL);
-router.route('/mongo').post(createUserMongo).get(getUsersMongo);
-router.route('/mongo/:id').get(getUserMongo).put(updateUserMongo).delete(deleteUserMongo);
+router.get("/api/users", userController.getUsers);
+
+router.get("/api/users/:id", userController.getUserById);
+
+router.post("/api/users", userController.createUser);
+
+router.put("/api/users", userController.updateUser);
+
+router.delete("/api/users/:id", userController.deleteUser);
 
 module.exports = router;

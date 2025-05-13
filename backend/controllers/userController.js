@@ -1,116 +1,104 @@
-const asyncHandler = require('express-async-handler');
-const { mysqlPool } = require('../config/db');
-const UserMongo = require('../models/mongodb/user');
+const userServices = require("../services/userServices");
 
-// MySQL CRUD
-const createUserMySQL = asyncHandler(async (req, res) => {
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await userServices.getUsers();
+    res.json({ users });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+exports.getUserById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await userServices.getUserById(id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: "User not found",
+      });
+    }
+    res.json({ user });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+exports.createUser = async (req, res) => {
   const { userName } = req.body;
+
   if (!userName) {
-    res.status(400);
-    throw new Error('Username is required');
+    return res.status(400).json({
+      success: false,
+      error: "Username is required",
+    });
   }
 
-  const [result] = await mysqlPool.query(
-    'INSERT INTO users (userName) VALUES (?)',
-    [userName]
-  );
-  res.status(201).json({ userId: result.insertId, userName });
-});
-
-const getUsersMySQL = asyncHandler(async (req, res) => {
-  const [rows] = await mysqlPool.query('SELECT * FROM users');
-  res.json(rows);
-});
-
-const getUserMySQL = asyncHandler(async (req, res) => {
-  const [rows] = await mysqlPool.query('SELECT * FROM users WHERE userId = ?', [req.params.id]);
-  if (rows.length === 0) {
-    res.status(404);
-    throw new Error('User not found');
+  try {
+    await userServices.createUser(userName);
+    return res.status(201).json({
+      success: true,
+      message: "User created successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
-  res.json(rows[0]);
-});
+};
 
-const updateUserMySQL = asyncHandler(async (req, res) => {
+exports.updateUser = async (req, res) => {
+  const { id } = req.params;
   const { userName } = req.body;
-  const [result] = await mysqlPool.query(
-    'UPDATE users SET userName = ? WHERE userId = ?',
-    [userName, req.params.id]
-  );
-  if (result.affectedRows === 0) {
-    res.status(404);
-    throw new Error('User not found');
-  }
-  res.json({ userId: parseInt(req.params.id), userName });
-});
 
-const deleteUserMySQL = asyncHandler(async (req, res) => {
-  const [result] = await mysqlPool.query('DELETE FROM users WHERE userId = ?', [req.params.id]);
-  if (result.affectedRows === 0) {
-    res.status(404);
-    throw new Error('User not found');
-  }
-  res.json({ message: 'User deleted' });
-});
-
-// MongoDB CRUD
-const createUserMongo = asyncHandler(async (req, res) => {
-  const { userName } = req.body;
-  if (!userName) {
-    res.status(400);
-    throw new Error('Username is required');
+  if (!userName || !email) {
+    return res.status(400).json({
+      success: false,
+      error: "Username is required",
+    });
   }
 
-  const user = await UserMongo.create({ userName });
-  res.status(201).json(user);
-});
-
-const getUsersMongo = asyncHandler(async (req, res) => {
-  const users = await UserMongo.find();
-  res.json(users);
-});
-
-const getUserMongo = asyncHandler(async (req, res) => {
-  const user = await UserMongo.findById(req.params.id);
-  if (!user) {
-    res.status(404);
-    throw new Error('User not found');
+  try {
+    await userServices.updateUser(id, userName);
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
-  res.json(user);
-});
+};
 
-const updateUserMongo = asyncHandler(async (req, res) => {
-  const { userName } = req.body;
-  const user = await UserMongo.findByIdAndUpdate(
-    req.params.id,
-    { userName },
-    { new: true }
-  );
-  if (!user) {
-    res.status(404);
-    throw new Error('User not found');
+exports.deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({
+      success: false,
+      error: "User ID is required",
+    });
   }
-  res.json(user);
-});
 
-const deleteUserMongo = asyncHandler(async (req, res) => {
-  const user = await UserMongo.findByIdAndDelete(req.params.id);
-  if (!user) {
-    res.status(404);
-    throw new Error('User not found');
+  try {
+    await userServices.deleteUser(id);
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
-  res.json({ message: 'User deleted' });
-});
-
-module.exports = {
-  createUserMySQL,
-  getUsersMySQL,
-  getUserMySQL,
-  updateUserMySQL,
-  deleteUserMySQL,
-  createUserMongo,
-  getUsersMongo,
-  getUserMongo,
-  updateUserMongo,
-  deleteUserMongo
 };

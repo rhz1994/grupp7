@@ -1,0 +1,36 @@
+[33m222080e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: pull: Fast-forward
+[33madd9240[m HEAD@{1}: commit: fixed worldly logo
+[33m41a27a8[m HEAD@{2}: commit: fixed buggs
+[33m75412f8[m HEAD@{3}: pull: Fast-forward
+[33m7bb750f[m HEAD@{4}: commit (merge): Merge branch 'master' of github.com:rhz1994/grupp7
+[33m6912c7f[m HEAD@{5}: commit: added trashcan
+[33m86b7761[m HEAD@{6}: pull: Fast-forward
+[33me74fb61[m HEAD@{7}: reset: moving to HEAD
+[33me74fb61[m HEAD@{8}: pull: Fast-forward
+[33m2158f99[m HEAD@{9}: reset: moving to HEAD
+[33m2158f99[m HEAD@{10}: commit: erged countryList
+[33m7994986[m HEAD@{11}: commit: merged countryList
+[33m4f4e9a9[m HEAD@{12}: pull: Merge made by the 'ort' strategy.
+[33m3543496[m HEAD@{13}: reset: moving to HEAD
+[33m3543496[m HEAD@{14}: commit: worked on css
+[33m1ee6ada[m HEAD@{15}: pull: Fast-forward
+[33m0a1ff6b[m HEAD@{16}: reset: moving to HEAD
+[33m0a1ff6b[m HEAD@{17}: commit: changed back to HomeView.vue
+[33mf0056b6[m HEAD@{18}: commit: changed to NewHomeView
+[33m74f0634[m HEAD@{19}: commit: fixed vue
+[33ma36e356[m HEAD@{20}: commit: removed node modules
+[33m4ead9d9[m HEAD@{21}: pull: Fast-forward
+[33mead25f7[m HEAD@{22}: pull: Fast-forward
+[33mda4f924[m HEAD@{23}: commit: Started on frontend
+[33m058cf33[m HEAD@{24}: pull: Fast-forward
+[33m4fa8e53[m HEAD@{25}: commit: changed to SQL
+[33m2738e5f[m HEAD@{26}: pull: Fast-forward
+[33m195e49e[m HEAD@{27}: reset: moving to HEAD
+[33m195e49e[m HEAD@{28}: pull: Fast-forward
+[33m80489ca[m HEAD@{29}: reset: moving to HEAD
+[33m80489ca[m HEAD@{30}: pull: Fast-forward
+[33m697015f[m HEAD@{31}: commit: fixed placesVisited
+[33m8af350a[m HEAD@{32}: commit: added folders for backend
+[33mc47c31b[m HEAD@{33}: commit: removed connectionMySql.js
+[33m119ddd5[m HEAD@{34}: commit: changed gitignore
+[33mb0942b9[m HEAD@{35}: commit (initial): initial commit

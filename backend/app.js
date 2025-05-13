@@ -7,6 +7,7 @@ const port = 3000;
 const placesVisitedRoutes = require("./routes/placesVisitedRoutes");
 const continentsRoutes = require("./routes/continentsRoutes");
 const countriesRoutes = require("./routes/countriesRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 app.use(express.json());
 
@@ -21,5 +22,7 @@ app.use(placesVisitedRoutes);
 app.use(continentsRoutes);
 
 app.use(countriesRoutes);
+
+app.use(userRoutes);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
